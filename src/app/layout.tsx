@@ -1,18 +1,27 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 
-import Layout from "@/components/Layout";
-import "./globals.scss";
+import MainLayout from "@/components/layouts/MainLayout";
+import { ThemeProvider } from "@/components/provider/theme-provider";
 
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
+import "./globals.css";
+
+const kiwiMaruLight = localFont({
+  src: "./fonts/KiwiMaru-Light.ttf",
+  variable: "--font-kiwimaru-Light",
+  weight: "300",
 });
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
+
+const kiwiMaruMedium = localFont({
+  src: "./fonts/KiwiMaru-Medium.ttf",
+  variable: "--font-kiwimaru-medium",
+  weight: "400",
+});
+
+const kiwiMaruRegular = localFont({
+  src: "./fonts/KiwiMaru-Regular.ttf",
+  variable: "--font-kiwimaru-regular",
+  weight: "500",
 });
 
 export const metadata: Metadata = {
@@ -27,8 +36,17 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ja">
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        <Layout>{children}</Layout>
+      <body
+        className={`${kiwiMaruRegular.className} ${kiwiMaruLight.variable} ${kiwiMaruMedium.variable} ${kiwiMaruRegular.variable}`}
+      >
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <MainLayout>{children}</MainLayout>
+        </ThemeProvider>
       </body>
     </html>
   );
