@@ -18,8 +18,12 @@ export type BlogPostsData = contentful.EntryCollection<GalleryPostSkeleton>;
 
 export async function GET(
   _: Request,
-  { params: { id } }: { params: { id: string } },
+  props: { params: Promise<{ id: string }> },
 ): Promise<NextResponse<BlogPostsData>> {
+  const params = await props.params;
+
+  const { id } = params;
+
   const entry = await client.getEntries<GalleryPostSkeleton>({
     "sys.id[in]": id.split(","),
   });

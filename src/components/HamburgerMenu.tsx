@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, type JSX } from "react";
 
 import Hamburger from "hamburger-react";
 import Link from "next/link";

@@ -1,4 +1,6 @@
 "use client";
+import type { JSX } from "react";
+
 import dayjs from "dayjs";
 
 export default function Footer(): JSX.Element {
