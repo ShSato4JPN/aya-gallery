@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 
 import MainLayout from "@/components/layouts/MainLayout";
@@ -23,6 +23,11 @@ const kiwiMaruRegular = localFont({
   variable: "--font-kiwimaru-regular",
   weight: "500",
 });
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+};
 
 export const metadata: Metadata = {
   title: "Create Next App",
