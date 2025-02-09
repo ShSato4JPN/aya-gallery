@@ -1,4 +1,4 @@
 {
-  "*": "prettier --ignore-unknown --write",
-  "**/*.{tsx,tx}": "eslint --fix"
+  "*": "biome format --write",
+  "**/*.{tsx,ts}": "biome lint --write"
 }
