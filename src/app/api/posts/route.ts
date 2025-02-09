@@ -6,10 +6,12 @@ import client from "@/lib/client";
 export type GalleryPostSkeleton = {
   contentTypeId: "ayaGallery";
   fields: {
+    title: contentful.EntryFieldTypes.Text;
     photo: contentful.EntryFieldTypes.AssetLink;
     tags: contentful.EntryFieldTypes.Array<contentful.EntryFieldTypes.Symbol>;
     category: contentful.EntryFieldTypes.Array<contentful.EntryFieldTypes.Symbol>;
     uploadAt: contentful.EntryFieldTypes.Date;
+    json: contentful.EntryFieldTypes.Object;
   };
 };
 
