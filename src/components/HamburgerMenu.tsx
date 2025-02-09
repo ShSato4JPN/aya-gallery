@@ -1,4 +1,6 @@
-import { useEffect, useState, type JSX } from "react";
+"use client";
+
+import { type JSX, useEffect, useState } from "react";
 
 import Hamburger from "hamburger-react";
 import Link from "next/link";
@@ -12,7 +14,7 @@ export default function HamburgerMenu(): JSX.Element {
 
   useEffect(() => {
     setIsOpen(false);
-  }, [pathname, setIsOpen]);
+  }, []);
 
   useEffect(() => {
     if (isOpen) {

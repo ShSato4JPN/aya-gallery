@@ -1,25 +1,24 @@
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 
-import MainLayout from "@/components/layouts/MainLayout";
-import { ThemeProvider } from "@/components/provider/theme-provider";
+import Layout from "@/components/Layout";
 
 import "./globals.css";
 
 const kiwiMaruLight = localFont({
-  src: "./fonts/KiwiMaru-Light.ttf",
+  src: "./KiwiMaru-Light.ttf",
   variable: "--font-kiwimaru-Light",
   weight: "300",
 });
 
 const kiwiMaruMedium = localFont({
-  src: "./fonts/KiwiMaru-Medium.ttf",
+  src: "./KiwiMaru-Medium.ttf",
   variable: "--font-kiwimaru-medium",
   weight: "400",
 });
 
 const kiwiMaruRegular = localFont({
-  src: "./fonts/KiwiMaru-Regular.ttf",
+  src: "./KiwiMaru-Regular.ttf",
   variable: "--font-kiwimaru-regular",
   weight: "500",
 });
@@ -44,14 +43,7 @@ export default function RootLayout({
       <body
         className={`${kiwiMaruRegular.className} ${kiwiMaruLight.variable} ${kiwiMaruMedium.variable} ${kiwiMaruRegular.variable}`}
       >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <MainLayout>{children}</MainLayout>
-        </ThemeProvider>
+        <Layout>{children}</Layout>
       </body>
     </html>
   );

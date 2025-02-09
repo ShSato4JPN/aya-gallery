@@ -1,4 +1,5 @@
 "use client";
+
 import type { JSX } from "react";
 
 import Link from "next/link";
@@ -22,7 +23,7 @@ export const menuList = [
 
 export default function Header(): JSX.Element {
   // 通常メニュー
-  const NormalMenu = (
+  const menus = (
     <ol className="flex flex-row gap-2">
       {menuList.map((item) => (
         <li
@@ -42,7 +43,7 @@ export default function Header(): JSX.Element {
           Aya-Gallery
         </div>
       </Link>
-      <nav className="md:flexf">{NormalMenu}</nav>
+      <nav className="md:flex">{menus}</nav>
       <nav className="md:hidden">
         <HamburgerMenu />
       </nav>
