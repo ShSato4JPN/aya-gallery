@@ -9,10 +9,8 @@ export default function Footer(): JSX.Element {
   const copyright = `© ${now.year()} - Copyright Aya-Gallery, All Rights Reserved.`;
 
   return (
-    <div className="py-4 text-center">
-      <footer>
-        <span className="text-base">{copyright}</span>
-      </footer>
-    </div>
+    <footer className="py-4 text-center">
+      <span className="text-sm text-gray-500">{copyright}</span>
+    </footer>
   );
 }

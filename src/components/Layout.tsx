@@ -12,7 +12,7 @@ export default function Layout({ children }: LayoutProps) {
     <div className="grid place-items-center w-screen h-screen">
       <div className="grid grid-rows-[auto,1fr,auto] w-full max-w-[1300px] h-full">
         <Header />
-        {children}
+        <main className="pt-2 pb-2">{children}</main>
         <Footer />
       </div>
     </div>
