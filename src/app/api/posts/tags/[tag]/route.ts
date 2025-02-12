@@ -12,11 +12,15 @@ export async function GET(
 ) {
   const { searchParams } = await new URL(req.url);
   const tag = (await props.params).tag;
-  const limit = Number(searchParams.get("limit") || 0);
 
-  const entries = await client.getTags({
-    "name[match]": tag,
+  const limit = Number(searchParams.get("limit") || 15);
+  const skip = Number(searchParams.get("skip") || 0);
+
+  const entries = await client.getEntries({
+    content_type: "ayaGallery",
+    "metadata.tags.sys.id[in]": [tag],
     limit,
+    skip,
   });
 
   return NextResponse.json(entries);
