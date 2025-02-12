@@ -1,9 +1,8 @@
+import Layout from "@/components/Layout";
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
-
-import Layout from "@/components/Layout";
-
 import "./globals.css";
+import { QueryProvider } from "@/components/QueryProvider";
 
 const kiwiMaruLight = localFont({
   src: "./KiwiMaru-Light.ttf",
@@ -43,7 +42,9 @@ export default function RootLayout({
       <body
         className={`${kiwiMaruRegular.className} ${kiwiMaruLight.variable} ${kiwiMaruMedium.variable} ${kiwiMaruRegular.variable}`}
       >
-        <Layout>{children}</Layout>
+        <QueryProvider>
+          <Layout>{children}</Layout>
+        </QueryProvider>
       </body>
     </html>
   );
