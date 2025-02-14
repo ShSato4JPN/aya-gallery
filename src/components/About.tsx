@@ -12,7 +12,7 @@ export default function About(): JSX.Element {
           <div className="flex justify-center">
             <Avatar className="w-32 h-32 md:w-40 md:h-40 rounded-full shadow-md">
               <AvatarImage
-                src="https://images.ctfassets.net/t8pgof6z62g7/6N1RGsnfKbc1zMHRMOBR1e/bff146429ee49eea8c77aba60063601d/4E845E6D-A775-4ADE-9C02-5A08B3A40875_1_105_c.jpeg"
+                src="https://images.ctfassets.net/t8pgof6z62g7/7fjsWYILCzV8pAQ2MTdIQY/c93dfc8b37347951d8b16c3f4eaa63cc/S__69869591_0.jpg"
                 alt="Photographer Avatar"
               />
               <AvatarFallback>PH</AvatarFallback>
