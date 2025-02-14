@@ -1,9 +1,22 @@
-export default function Page() {
+import type { BlogPostsData } from "@/app/api/posts/route";
+import HomeTop from "@/components/HomeTop";
+import { fetchBlogPostData } from "@/lib/fetcher";
+import { getQueryClient } from "@/lib/get-query-client";
+import { HydrationBoundary, dehydrate } from "@tanstack/react-query";
+
+export default async function Page() {
+  const entryId = process.env.NEXT_PUBLIC_ENTRY_ID_TOP as string;
+  const queryClient = getQueryClient();
+
+  await queryClient.prefetchQuery({
+    queryKey: ["post"],
+    queryFn: () => fetchBlogPostData(entryId),
+  });
+  const dehydratedState = dehydrate(queryClient);
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        hello, world!
-      </main>
-    </div>
+    <HydrationBoundary state={dehydratedState}>
+      <HomeTop />
+    </HydrationBoundary>
   );
 }
