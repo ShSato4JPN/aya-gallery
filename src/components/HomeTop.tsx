@@ -28,7 +28,7 @@ export default function HomeTop(): JSX.Element {
   });
 
   const photos: PhotoData[] = useMemo(() => {
-    const photos = data?.fields.photo as AssetEntry[];
+    const photos = (data?.fields.photo as AssetEntry[]) || [];
 
     return photos.map((v) => ({
       title: v.fields.title,
