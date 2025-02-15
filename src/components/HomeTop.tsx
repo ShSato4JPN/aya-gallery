@@ -5,7 +5,7 @@ import PhotoDialog from "@/components/PhotoDialog";
 import { fetchBlogPostData } from "@/lib/fetcher";
 import type { AssetEntry } from "@/types/contentful";
 import { useQuery } from "@tanstack/react-query";
-import { backOut, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import Image from "next/image";
 import { type JSX, useMemo, useState } from "react";
 
@@ -32,15 +32,13 @@ export default function HomeTop(): JSX.Element {
 
     return photos.map((v) => ({
       title: v.fields.title,
-      url: `https://${v.fields.file.url}`,
+      url: `https:${v.fields.file.url}`,
       size: {
         width: v.fields.file.details.image?.width || 0,
         height: v.fields.file.details.image?.height || 0,
       },
     }));
   }, [data]);
-
-  console.log(photos);
 
   return (
     <div className="grid grid-cols-3 gap-10">
@@ -67,10 +65,10 @@ export default function HomeTop(): JSX.Element {
           }}
         >
           <Image
+            className="object-cover"
             src={url}
             alt={title}
-            className="object-cover"
-            fill
+            fill={true}
             quality={100}
           />
         </motion.div>
