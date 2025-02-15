@@ -5,7 +5,9 @@ import { NextResponse } from "next/server";
 
 export type BlogPostsData = contentful.EntryCollection<GalleryPostSkeleton>;
 
-export async function GET(): Promise<NextResponse<BlogPostsData>> {
+export async function GET(req: Request): Promise<NextResponse<BlogPostsData>> {
+  console.log(JSON.stringify(req));
+
   const entries = await client.getEntries<GalleryPostSkeleton>({
     content_type: "ayaGallery",
     order: ["-fields.uploadAt"],
