@@ -1,10 +1,10 @@
 "use client";
 
+import type { PhotoData } from "@/types";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import type { JSX } from "react";
 import { AiOutlineClose } from "react-icons/ai";
-import type { PhotoData } from "./Home";
 import { Button } from "./ui/button";
 
 type PhotoDialogProps = {

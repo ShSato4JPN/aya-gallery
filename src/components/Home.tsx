@@ -4,6 +4,7 @@ import type { BlogPostData } from "@/app/api/posts/[id]/route";
 import Opening from "@/components/Opening";
 import PhotoDialog from "@/components/PhotoDialog";
 import { fetchBlogPostData } from "@/lib/fetcher";
+import type { PhotoData } from "@/types";
 import type { AssetEntry } from "@/types/contentful";
 import { useQuery } from "@tanstack/react-query";
 import { motion } from "framer-motion";
@@ -12,15 +13,6 @@ import Link from "next/link";
 import { type JSX, useMemo, useState } from "react";
 import Footer from "./Footer";
 import Header from "./Header";
-
-type PhotoData = {
-  title: string;
-  url: string;
-  size: {
-    width: number;
-    height: number;
-  };
-};
 
 export default function Home(): JSX.Element {
   const entryId = process.env.NEXT_PUBLIC_ENTRY_ID_TOP as string;
