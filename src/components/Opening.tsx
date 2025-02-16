@@ -23,8 +23,8 @@ export default function Opening({ onOpeningEnd }: OpeningProps) {
         {/* スマホ用オープニング */}
         <MobileOpening onAnimEnd={onOpeningEnd} />
       </Tablet>
-      {/* デフォルトオープニング */}
       <Desktop>
+        {/* デフォルトオープニング */}
         <AnimatePresence>
           {!isClose && (
             <DefaultOpening

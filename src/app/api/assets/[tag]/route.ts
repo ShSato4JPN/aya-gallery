@@ -1,23 +1,20 @@
 import client from "@/lib/client";
-import type { GalleryPostSkeleton } from "@/types/contentful";
 import type * as contentful from "contentful";
 import { type NextRequest, NextResponse } from "next/server";
 
-export type PostsDataContainTag =
-  contentful.EntryCollection<GalleryPostSkeleton>;
+export type AssetsData = contentful.AssetCollection;
 
 export async function GET(
   req: NextRequest,
   { params }: { params: Promise<{ tag: string }> },
-) {
+): Promise<NextResponse<AssetsData>> {
   const searchParams = req.nextUrl.searchParams;
   const tag = (await params).tag;
 
   const limit = Number(searchParams.get("limit") || 15);
   const skip = Number(searchParams.get("skip") || 0);
 
-  const entries = await client.getEntries({
-    content_type: "ayaGallery",
+  const entries = await client.getAssets({
     "metadata.tags.sys.id[in]": [tag],
     limit,
     skip,

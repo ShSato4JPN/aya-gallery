@@ -1,13 +1,11 @@
 import client from "@/lib/client";
-import type { GalleryPostSkeleton } from "@/types/contentful";
-import type * as contentful from "contentful";
+import type { TagCollection } from "contentful";
 import { type NextRequest, NextResponse } from "next/server";
 
-export type PostsDataContainTag =
-  contentful.EntryCollection<GalleryPostSkeleton>;
+export type TagsData = TagCollection;
 
-export async function GET(_: NextRequest) {
-  const entries = await client.getTags();
+export async function GET(_: NextRequest): Promise<NextResponse<TagsData>> {
+  const tags = await client.getTags();
 
-  return NextResponse.json(entries);
+  return NextResponse.json(tags);
 }

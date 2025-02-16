@@ -4,7 +4,8 @@ import { menuLinks, siteName } from "@/lib/utils";
 import { AnimatePresence, motion } from "framer-motion";
 import Hamburger from "hamburger-react";
 import Link from "next/link";
-import { type JSX, useState } from "react";
+import { useRouter } from "next/router";
+import { type JSX, useEffect, useState } from "react";
 
 export default function HamburgerNav(): JSX.Element {
   const [isOpen, setOpen] = useState<boolean>(false);

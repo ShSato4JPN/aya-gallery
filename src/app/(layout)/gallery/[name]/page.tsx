@@ -1,20 +1,23 @@
-import GalleryList from "@/components/GalleryList";
-import { fetchTagsList } from "@/lib/fetcher";
+import Gallery from "@/components/Gallery";
+import { fetchAssetsData } from "@/lib/fetcher";
 import { getQueryClient } from "@/lib/get-query-client";
 import { HydrationBoundary, dehydrate } from "@tanstack/react-query";
 
-export default async function Page() {
+export default async function Page({
+  params,
+}: { params: Promise<{ name: string }> }) {
   const queryClient = getQueryClient();
+  const name = (await params).name;
 
   await queryClient.prefetchQuery({
-    queryKey: ["tags"],
-    queryFn: () => fetchTagsList(),
+    queryKey: ["assets"],
+    queryFn: () => fetchAssetsData(name),
   });
   const dehydratedState = dehydrate(queryClient);
 
   return (
     <HydrationBoundary state={dehydratedState}>
-      <GalleryList />
+      <Gallery name={name} />
     </HydrationBoundary>
   );
 }

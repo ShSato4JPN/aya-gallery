@@ -9,7 +9,6 @@ export const siteName = "Aya-Gallery";
 
 export const menuLinks = [
   { href: "/gallery", label: "Gallery" },
-  { href: "/tag", label: "Tag" },
   { href: "/about", label: "About" },
   { href: "/contact", label: "Contact" },
 ];
