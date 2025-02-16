@@ -1,10 +1,26 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import Link from "next/link";
 import { FaFacebook, FaInstagram, FaXTwitter } from "react-icons/fa6";
 
 import type { JSX } from "react";
 
 export default function About(): JSX.Element {
+  const snsList = [
+    {
+      url: "",
+      icon: <FaXTwitter className="text-3xl" />,
+    },
+    {
+      url: "",
+      icon: <FaInstagram className="text-3xl" />,
+    },
+    {
+      url: "",
+      icon: <FaFacebook className="text-3xl" />,
+    },
+  ];
+
   return (
     <div className="flex flex-col justify-center items-center  space-y-6">
       <Card className="max-w-4xl w-full p-6 border-none shadow-none">
@@ -27,9 +43,11 @@ export default function About(): JSX.Element {
                 福岡県在住のフォトグラファーです。主に風景写真を撮影しています。撮影地は主に福岡県内ですが、九州各地にも足を運んでいます。
               </p>
               <div className="mt-5 flex justify-center md:justify-start space-x-5">
-                <FaXTwitter className="text-3xl" />
-                <FaInstagram className="text-3xl" />
-                <FaFacebook className="text-3xl" />
+                {snsList.map(({ url, icon }) => (
+                  <Link key={url} href={url}>
+                    {icon}
+                  </Link>
+                ))}
               </div>
             </CardContent>
           </div>

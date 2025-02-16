@@ -1,5 +1,3 @@
-"use client";
-
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 
@@ -9,10 +7,10 @@ type LayoutProps = {
 
 export default function Layout({ children }: LayoutProps) {
   return (
-    <div className="grid place-items-center w-screen h-screen">
-      <div className="grid grid-rows-[auto,1fr,auto] w-full max-w-[1300px] h-full">
+    <div className="grid place-items-center w-dvw h-dvh">
+      <div className="grid grid-rows-[auto,1fr,auto] w-full max-w-[1200px] h-full">
         <Header />
-        <main className="pt-2 pb-2">{children}</main>
+        <main>{children}</main>
         <Footer />
       </div>
     </div>

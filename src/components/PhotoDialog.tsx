@@ -3,17 +3,17 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import type { JSX } from "react";
+import { AiOutlineClose } from "react-icons/ai";
+import type { PhotoData } from "./Home";
 import { Button } from "./ui/button";
 
-import { AiOutlineClose } from "react-icons/ai";
-
 type PhotoDialogProps = {
-  source: string;
+  img: PhotoData;
   onClose: () => void;
 };
 
 export default function PhotoDialog({
-  source,
+  img,
   onClose,
 }: PhotoDialogProps): JSX.Element {
   return (
@@ -23,22 +23,20 @@ export default function PhotoDialog({
       animate={{ opacity: 1 }}
       transition={{ duration: 0.1 }}
     >
-      <div className="w-full h-full p-8 bg-black bg-opacity-75">
-        <div className="flex flex-col w-full h-full">
-          <div className="flex justify-end">
-            <Button variant={"outline"} onClick={onClose}>
-              <AiOutlineClose />
-            </Button>
-          </div>
-          <div className="relative flex justify-center items-center w-full h-full">
-            <Image
-              src={source}
-              className="object-contain"
-              fill={true}
-              quality={100}
-              alt="A photo"
-            />
-          </div>
+      <div className="w-full h-full p-6 bg-gray-100/70">
+        <div className="fixed top-5 right-5">
+          <Button variant={"outline"} onClick={onClose}>
+            <AiOutlineClose />
+          </Button>
+        </div>
+        <div className="relative flex justify-center items-center w-full h-full">
+          <Image
+            src={img.url}
+            className="object-contain"
+            fill={true}
+            quality={100}
+            alt={img.title}
+          />
         </div>
       </div>
     </motion.div>

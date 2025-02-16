@@ -10,7 +10,7 @@ export default function Footer(): JSX.Element {
 
   return (
     <footer className="py-4 text-center">
-      <span className="text-sm text-gray-500">{copyright}</span>
+      <span className="text-xs md:text-md text-gray-500">{copyright}</span>
     </footer>
   );
 }

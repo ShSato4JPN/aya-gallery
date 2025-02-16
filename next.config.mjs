@@ -7,6 +7,7 @@ const nextConfig = {
         hostname: "images.ctfassets.net",
         port: "",
         pathname: "/t8pgof6z62g7/**",
+        search: "",
       },
     ],
   },

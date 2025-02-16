@@ -1,5 +1,4 @@
-import type { BlogPostsData } from "@/app/api/posts/route";
-import HomeTop from "@/components/HomeTop";
+import Home from "@/components/Home";
 import { fetchBlogPostData } from "@/lib/fetcher";
 import { getQueryClient } from "@/lib/get-query-client";
 import { HydrationBoundary, dehydrate } from "@tanstack/react-query";
@@ -16,7 +15,7 @@ export default async function Page() {
 
   return (
     <HydrationBoundary state={dehydratedState}>
-      <HomeTop />
+      <Home />
     </HydrationBoundary>
   );
 }
