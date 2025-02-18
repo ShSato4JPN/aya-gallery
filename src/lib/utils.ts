@@ -8,7 +8,8 @@ export function cn(...inputs: ClassValue[]) {
 export const siteName = "Aya-Gallery";
 
 export const menuLinks = [
-  { href: "/gallery", label: "Gallery" },
+  { href: "/", label: "Home" },
+  { href: "/tags", label: "Tags" },
   { href: "/about", label: "About" },
   { href: "/contact", label: "Contact" },
 ];

@@ -6,6 +6,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { ErrorMessage } from "@hookform/error-message";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { motion } from "framer-motion";
 import React, { type JSX } from "react";
 import { type SubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod";
@@ -38,7 +39,15 @@ export default function Contact(): JSX.Element {
   );
 
   return (
-    <div className="flex flex-col justify-center items-center space-y-6">
+    <motion.div
+      className="w-full h-full grid place-items-center p-4"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{
+        duration: 0.4,
+        ease: "easeIn",
+      }}
+    >
       <form onSubmit={handleSubmit(onSubmit)} className="w-full max-w-xl">
         <div className="mb-2">
           <Label htmlFor="name">名前</Label>
@@ -82,6 +91,6 @@ export default function Contact(): JSX.Element {
           </Button>
         </div>
       </form>
-    </div>
+    </motion.div>
   );
 }

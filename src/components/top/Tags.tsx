@@ -22,7 +22,7 @@ type PhotoData = {
   };
 };
 
-export default function Gallery({ name }: GalleryProps): JSX.Element {
+export default function Tag({ name }: GalleryProps): JSX.Element {
   const [selectedImage, setSelectedImage] = useState<PhotoData>();
 
   const { data, isFetching } = useQuery<AssetsData>({

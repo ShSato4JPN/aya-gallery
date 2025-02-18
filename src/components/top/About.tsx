@@ -1,11 +1,21 @@
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+"use client";
 
 import SnsIcons from "@/components/SnsIcons";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { motion } from "framer-motion";
 import type { JSX } from "react";
 
 export default function About(): JSX.Element {
   return (
-    <div className="w-full h-full grid place-items-center p-4">
+    <motion.div
+      className="w-full h-full grid place-items-center p-4"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{
+        duration: 0.4,
+        ease: "easeIn",
+      }}
+    >
       <div className="md:w-2/5 flex flex-col justify-center items-center">
         <Avatar className="w-32 h-32 mb-6 md:w-44 md:h-44 rounded-full shadow-md">
           <AvatarImage
@@ -26,6 +36,6 @@ export default function About(): JSX.Element {
           <SnsIcons />
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }

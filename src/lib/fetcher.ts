@@ -33,6 +33,16 @@ export const fetchBlogPostsData = async ({
   return res.json();
 };
 
+export const fetchTagData = async (tag: string): Promise<TagsData> => {
+  const res = await fetch(
+    queryString.stringifyUrl({
+      url: `${process.env.NEXT_PUBLIC_URL}/api/tags/${tag}`,
+    }),
+  );
+
+  return res.json();
+};
+
 export const fetchTagsList = async (): Promise<TagsData> => {
   const res = await fetch(
     queryString.stringifyUrl({

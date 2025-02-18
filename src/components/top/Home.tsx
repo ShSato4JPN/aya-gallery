@@ -4,24 +4,22 @@ import type { BlogPostData } from "@/app/api/posts/[id]/route";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import Opening from "@/components/Opening";
-import PhotoDialog from "@/components/PhotoDialog";
 import { fetchBlogPostData } from "@/lib/fetcher";
 import type { PhotoData } from "@/types";
 import type { AssetEntry } from "@/types/contentful";
 import { useQuery } from "@tanstack/react-query";
 import { motion } from "framer-motion";
-import Image from "next/image";
 import Link from "next/link";
 import { type JSX, useMemo, useState } from "react";
+import Loading from "../Loading";
 import PhotoList from "../PhotoList";
 
 export default function Home(): JSX.Element {
   const entryId = process.env.NEXT_PUBLIC_ENTRY_ID_TOP as string;
 
-  const [selectedImage, setSelectedImage] = useState<PhotoData>();
   const [isOpeningEnd, setIsOpeningEnd] = useState<boolean>(false);
 
-  const { data } = useQuery<BlogPostData>({
+  const { data, isFetching } = useQuery<BlogPostData>({
     queryKey: ["post"],
     queryFn: () => fetchBlogPostData(entryId),
   });
@@ -49,7 +47,10 @@ export default function Home(): JSX.Element {
         ease: "linear",
       }}
     >
-      <Link href="/gallery" className="cursor-pointer">
+      <Link
+        href="/tags"
+        className="cursor-pointer hover:scale-125 transition duration-300"
+      >
         <span className="text-lg">see more {">>"}</span>
       </Link>
     </motion.div>
@@ -65,8 +66,14 @@ export default function Home(): JSX.Element {
             animate={{ opacity: 1, transition: { duration: 1 } }}
           >
             <Header />
-            <PhotoList photos={photos} />
-            <SeeMore />
+            {isFetching ? (
+              <Loading />
+            ) : (
+              <>
+                <PhotoList photos={photos} />
+                <SeeMore />
+              </>
+            )}
             <Footer />
           </motion.div>
         )}

@@ -4,10 +4,27 @@ import { menuLinks, siteName } from "@/lib/utils";
 import { AnimatePresence, motion } from "framer-motion";
 import Hamburger from "hamburger-react";
 import Link from "next/link";
-import { type JSX, useState } from "react";
+import { usePathname } from "next/navigation";
+import { type JSX, useEffect, useState } from "react";
 
 export default function HamburgerNav(): JSX.Element {
+  const pathname = usePathname();
   const [isOpen, setOpen] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    }
+
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [isOpen]);
+
+  // biome-ignore lint: コードとしては問題がないため
+  useEffect(() => {
+    setOpen(false);
+  }, [pathname]);
 
   return (
     <>
@@ -29,17 +46,25 @@ export default function HamburgerNav(): JSX.Element {
             animate={{ opacity: 1, backdropFilter: "blur(10px)" }}
             exit={{ opacity: 0 }}
             transition={{
-              duration: 0.4,
-              ease: "easeOut",
+              duration: 0.3,
+              ease: "easeIn",
             }}
           >
             <div className="flex flex-col justify-center items-center h-full bg-white/70">
               <div className="flex flex-col space-y-8">
-                {menuLinks.map(({ href, label }) => (
-                  <Link key={href} href={href}>
-                    <p className="text-lg text-gray-800 text-center">{label}</p>
-                  </Link>
-                ))}
+                {menuLinks.map(({ href, label }) => {
+                  const isActive = pathname === href;
+
+                  return (
+                    <Link key={href} href={href}>
+                      <p
+                        className={`text-lg text-gray-800 text-center ${isActive && "border-b-2 border-gray-800"}`}
+                      >
+                        {label}
+                      </p>
+                    </Link>
+                  );
+                })}
               </div>
             </div>
           </motion.div>

@@ -20,7 +20,11 @@ export default function SnsIcons() {
   return (
     <div className="flex justify-center md:justify-start space-x-5 pt-1">
       {snsList.map(({ url, icon }) => (
-        <Link key={url} href={url}>
+        <Link
+          key={url}
+          href={url}
+          className="hover:animate-bounce transition duration-300"
+        >
           {icon}
         </Link>
       ))}

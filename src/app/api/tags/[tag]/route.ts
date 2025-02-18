@@ -7,16 +7,13 @@ export type PostsDataContainTag =
   contentful.EntryCollection<GalleryPostSkeleton>;
 
 export async function GET(
-  req: NextRequest,
+  _: NextRequest,
   { params }: { params: Promise<{ tag: string }> },
 ) {
-  const searchParams = req.nextUrl.searchParams;
   const tag = (await params).tag;
-  const limit = Number(searchParams.get("limit") || 0);
 
   const entries = await client.getTags({
-    "name[match]": tag,
-    limit,
+    "sys.id": tag,
   });
 
   return NextResponse.json(entries);

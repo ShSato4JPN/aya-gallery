@@ -1,7 +1,7 @@
 "use client";
 
 import type { PhotoData } from "@/types";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
 import { useMemo, useState } from "react";
 import PhotoDialog from "./PhotoDialog";
@@ -60,7 +60,7 @@ export default function PhotoList({ photos }: PhotoListProps) {
             }}
           >
             <Image
-              className="object-cover hover:scale-110 transition duration-700"
+              className="object-cover hover:scale-110 hover:brightness-125 transition duration-700"
               src={photo.url}
               alt={photo.title}
               fill={true}
@@ -73,22 +73,26 @@ export default function PhotoList({ photos }: PhotoListProps) {
   };
 
   return (
-    <ul className="flex flex-col p-2 gap-2 md:gap-3 md:p-3">
-      {selectedImage && (
-        <PhotoDialog
-          img={selectedImage}
-          onClose={() => setSelectedImage(undefined)}
-        />
-      )}
-      {groups.map((photosData, index) => (
-        <li key={photosData[0].url}>
-          {rendering({
-            group: photosData,
-            countStart: index,
-            type: index % 2 === 0 ? "left" : "right",
-          })}
-        </li>
-      ))}
-    </ul>
+    <section className="w-full">
+      <AnimatePresence>
+        {selectedImage && (
+          <PhotoDialog
+            img={selectedImage}
+            onClose={() => setSelectedImage(undefined)}
+          />
+        )}
+      </AnimatePresence>
+      <ul className="flex flex-col p-2 gap-2 md:gap-3 md:p-3">
+        {groups.map((photosData, index) => (
+          <li key={photosData[0].url}>
+            {rendering({
+              group: photosData,
+              countStart: index,
+              type: index % 2 === 0 ? "left" : "right",
+            })}
+          </li>
+        ))}
+      </ul>
+    </section>
   );
 }
