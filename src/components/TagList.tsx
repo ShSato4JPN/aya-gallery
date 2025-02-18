@@ -8,7 +8,7 @@ import { type JSX, useMemo } from "react";
 
 type TagData = string;
 
-export default function GalleryList(): JSX.Element {
+export default function TagList(): JSX.Element {
   const { data, isFetching } = useQuery<TagsData>({
     queryKey: ["tags"],
     queryFn: () => fetchTagsList(),

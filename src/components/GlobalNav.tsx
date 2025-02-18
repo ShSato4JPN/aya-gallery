@@ -11,7 +11,7 @@ import type { JSX } from "react";
 
 export default function GlobalNav(): JSX.Element {
   return (
-    <nav className="w-full bg-white py-5">
+    <nav className="w-full py-5">
       <div className="container mx-auto px-4 flex items-center justify-between">
         <div className="flex items-center justify-between">
           <h1 className="text-3xl font-bold mr-12">

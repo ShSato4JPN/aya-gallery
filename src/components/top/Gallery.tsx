@@ -6,9 +6,8 @@ import type { AssetEntry } from "@/types/contentful";
 import { useQuery } from "@tanstack/react-query";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import Link from "next/link";
 import { type JSX, useMemo, useState } from "react";
-import PhotoDialog from "./PhotoDialog";
+import PhotoDialog from "../PhotoDialog";
 
 type GalleryProps = {
   name: string;

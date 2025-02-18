@@ -8,9 +8,9 @@ type LayoutProps = {
 export default function Layout({ children }: LayoutProps) {
   return (
     <div className="grid place-items-center w-dvw h-dvh">
-      <div className="grid grid-rows-[auto,1fr,auto] w-full max-w-[1200px] h-full">
+      <div className="grid grid-rows-[auto,1fr,auto] w-full max-w-[1980px] h-full">
         <Header />
-        <main className="w-full max-w-[1400px]">{children}</main>
+        <main className="w-full">{children}</main>
         <Footer />
       </div>
     </div>

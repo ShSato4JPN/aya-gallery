@@ -4,15 +4,15 @@ import { FaFacebook, FaInstagram, FaXTwitter } from "react-icons/fa6";
 export default function SnsIcons() {
   const snsList = [
     {
-      url: "",
+      url: "1",
       icon: <FaXTwitter className="text-3xl" />,
     },
     {
-      url: "",
+      url: "2",
       icon: <FaInstagram className="text-3xl" />,
     },
     {
-      url: "",
+      url: "3",
       icon: <FaFacebook className="text-3xl" />,
     },
   ];

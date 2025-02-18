@@ -1,4 +1,4 @@
-import Gallery from "@/components/Gallery";
+import Gallery from "@/components/top/Gallery";
 import { fetchAssetsData } from "@/lib/fetcher";
 import { getQueryClient } from "@/lib/get-query-client";
 import { HydrationBoundary, dehydrate } from "@tanstack/react-query";

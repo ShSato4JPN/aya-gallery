@@ -4,8 +4,7 @@ import { menuLinks, siteName } from "@/lib/utils";
 import { AnimatePresence, motion } from "framer-motion";
 import Hamburger from "hamburger-react";
 import Link from "next/link";
-import { useRouter } from "next/router";
-import { type JSX, useEffect, useState } from "react";
+import { type JSX, useState } from "react";
 
 export default function HamburgerNav(): JSX.Element {
   const [isOpen, setOpen] = useState<boolean>(false);
@@ -36,11 +35,9 @@ export default function HamburgerNav(): JSX.Element {
           >
             <div className="flex flex-col justify-center items-center h-full bg-white/70">
               <div className="flex flex-col space-y-8">
-                {menuLinks.map((link) => (
-                  <Link key={link.href} href={link.href}>
-                    <p className="text-lg text-gray-800 text-center">
-                      {link.label}
-                    </p>
+                {menuLinks.map(({ href, label }) => (
+                  <Link key={href} href={href}>
+                    <p className="text-lg text-gray-800 text-center">{label}</p>
                   </Link>
                 ))}
               </div>

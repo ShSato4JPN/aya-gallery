@@ -39,7 +39,7 @@ export default function RootLayout({
   return (
     <html lang="ja">
       <body
-        className={`${kiwiMaruRegular.className} ${kiwiMaruLight.variable} ${kiwiMaruMedium.variable} ${kiwiMaruRegular.variable}`}
+        className={`text-slate-700 ${kiwiMaruRegular.className} ${kiwiMaruLight.variable} ${kiwiMaruMedium.variable} ${kiwiMaruRegular.variable}`}
       >
         <QueryProvider>{children}</QueryProvider>
       </body>

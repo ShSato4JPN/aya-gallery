@@ -1,4 +1,4 @@
-import GalleryList from "@/components/GalleryList";
+import TagList from "@/components/TagList";
 import { fetchTagsList } from "@/lib/fetcher";
 import { getQueryClient } from "@/lib/get-query-client";
 import { HydrationBoundary, dehydrate } from "@tanstack/react-query";
@@ -14,7 +14,7 @@ export default async function Page() {
 
   return (
     <HydrationBoundary state={dehydratedState}>
-      <GalleryList />
+      <TagList />
     </HydrationBoundary>
   );
 }

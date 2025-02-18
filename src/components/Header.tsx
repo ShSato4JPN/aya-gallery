@@ -1,5 +1,3 @@
-"use client";
-
 import GlobalNav from "@/components/GlobalNav";
 import HamburgerNav from "@/components/HamburgerNav";
 import type { JSX } from "react";
