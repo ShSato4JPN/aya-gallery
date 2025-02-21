@@ -1,92 +1,60 @@
 "use client";
 
-import type { AssetsData } from "@/app/api/assets/[tag]/route";
-import { fetchAssetsData } from "@/lib/fetcher";
-import type { AssetEntry } from "@/types/contentful";
+import type { TagsData } from "@/app/api/tags/route";
+import { fetchTagsList } from "@/lib/fetcher";
 import { useQuery } from "@tanstack/react-query";
 import { motion } from "framer-motion";
-import Image from "next/image";
-import { type JSX, useMemo, useState } from "react";
-import PhotoDialog from "../PhotoDialog";
+import Link from "next/link";
+import { type JSX, useMemo } from "react";
+import Loading from "@/components/Loading";
+import { LuTag } from "react-icons/lu";
 
-type GalleryProps = {
+type Tag = {
+  id: string;
   name: string;
 };
 
-type PhotoData = {
-  title: string;
-  url: string;
-  size: {
-    width: number;
-    height: number;
-  };
-};
-
-export default function Tag({ name }: GalleryProps): JSX.Element {
-  const [selectedImage, setSelectedImage] = useState<PhotoData>();
-
-  const { data, isFetching } = useQuery<AssetsData>({
-    queryKey: ["assets"],
-    queryFn: () => fetchAssetsData(name),
+export default function Tags(): JSX.Element {
+  const { data, isFetching } = useQuery<TagsData>({
+    queryKey: ["tags"],
+    queryFn: () => fetchTagsList(),
   });
 
-  const photos: PhotoData[] = useMemo(() => {
-    const photos = (data?.items as AssetEntry[]) || [];
-
-    return photos.map((v) => ({
-      title: v.fields.title,
-      url: `https:${v.fields.file.url}`,
-      size: {
-        width: v.fields.file.details.image?.width || 0,
-        height: v.fields.file.details.image?.height || 0,
-      },
-    }));
+  const tags: Tag[] = useMemo(() => {
+    return data?.items.map((v) => ({ id: v.sys.id, name: v.name })) || [];
   }, [data]);
 
-  const Loading = () => {
-    return <p>loading...</p>;
-  };
-
-  console.table(photos);
-
   return (
-    <>
+    <div className="w-full h-full flex flex-col items-center justify-center">
       {isFetching ? (
         <Loading />
       ) : (
-        <div className="w-full h-full grid place-items-center">
-          <div className="grid grid-cols-2 gap-3 p-3 md:grid-cols-3 md:gap-7">
-            {selectedImage && (
-              <PhotoDialog
-                img={selectedImage}
-                onClose={() => setSelectedImage(undefined)}
-              />
-            )}
-            {photos.map((img, index) => (
+        <motion.div
+          className="w-full h-full flex flex-col items-center justify-center"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{
+            duration: 0.5,
+            ease: "easeIn",
+          }}
+        >
+          <div className="flex items-center justify-center gap-2 text-3xl">
+            <LuTag />
+            <h1 className="font-bold mb-1">Tags</h1>
+          </div>
+          <div className="w-3/5 max-w-[800px] flex justify-center flex-wrap gap-3 bg-slate-200 rounded-lg shadow-lg mt-4 p-5">
+            {tags.map((tag) => (
               <motion.div
-                key={img.url}
-                onClick={() => setSelectedImage(img)}
-                className="relative w-full max-w-md h-52 md:h-64 overflow-hidden cursor-pointer rounded-sm"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{
-                  delay: index * 0.3,
-                  duration: 0.5,
-                  ease: "easeOut",
-                }}
+                key={tag.id}
+                className="text-sm p-3 bg-white rounded-lg shadow-lg text-center cursor-pointer"
+                whileHover={{ scale: 1.2 }}
               >
-                <Image
-                  className="object-cover"
-                  src={img.url}
-                  alt={img.title}
-                  fill={true}
-                  quality={100}
-                />
+                <Link href={`/tags/${tag.id}`}>{tag.name}</Link>
               </motion.div>
             ))}
           </div>
-        </div>
+        </motion.div>
       )}
-    </>
+    </div>
   );
 }

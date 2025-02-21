@@ -1,4 +1,4 @@
-import TagList from "@/components/TagList";
+import Tags from "@/components/top/Tags";
 import { fetchTagsList } from "@/lib/fetcher";
 import { getQueryClient } from "@/lib/get-query-client";
 import { HydrationBoundary, dehydrate } from "@tanstack/react-query";
@@ -14,7 +14,7 @@ export default async function Page() {
 
   return (
     <HydrationBoundary state={dehydratedState}>
-      <TagList />
+      <Tags />
     </HydrationBoundary>
   );
 }

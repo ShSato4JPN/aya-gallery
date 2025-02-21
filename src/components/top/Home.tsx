@@ -57,27 +57,30 @@ export default function Home(): JSX.Element {
   );
 
   return (
-    <main className="flex flex-col items-center justify-center w-full min-h-screen">
+    <div className="grid place-items-center w-dvw h-dvh">
       <Opening onOpeningEnd={() => setIsOpeningEnd(true)} />
-      <div className="w-full max-w-[1980px] min-h-screen">
-        {isOpeningEnd && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1, transition: { duration: 1 } }}
-          >
-            <Header />
-            {isFetching ? (
+      {isOpeningEnd && (
+        <motion.div
+          className="grid grid-rows-[auto,1fr,auto] h-full w-full"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1, transition: { duration: 1 } }}
+        >
+          <Header />
+          {isFetching ? (
+            <div className="flex justify-center items-center h-full">
               <Loading />
-            ) : (
-              <>
+            </div>
+          ) : (
+            <main className="flex flex-col items-center justify-center">
+              <div className="w-full max-w-[1600px]">
                 <PhotoList photos={photos} />
                 <SeeMore />
-              </>
-            )}
-            <Footer />
-          </motion.div>
-        )}
-      </div>
-    </main>
+              </div>
+            </main>
+          )}
+          <Footer />
+        </motion.div>
+      )}
+    </div>
   );
 }

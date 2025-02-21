@@ -7,6 +7,7 @@ import { fetchAssetsData } from "@/lib/fetcher";
 import type { PhotoData } from "@/types";
 import type { AssetEntry } from "@/types/contentful";
 import { useQuery } from "@tanstack/react-query";
+import Link from "next/link";
 import { type JSX, useMemo } from "react";
 import { LuTag } from "react-icons/lu";
 
@@ -35,13 +36,18 @@ export default function TagsId({ id, name }: TagsIdProps): JSX.Element {
   }, [data]);
 
   return (
-    <main className="w-full min-h-full flex flex-col items-center justify-center">
+    <main className="w-full min-h-full flex flex-col items-center">
       {isFetching ? (
         <Loading />
       ) : (
         <>
           <div className="flex items-center justify-center gap-2 mt-7 mr-3 mb-7 text-2xl">
-            <LuTag />
+            <Link
+              href="/tags"
+              className="hover:scale-125 transition duration-300"
+            >
+              <LuTag />
+            </Link>
             <h1>{name}</h1>
           </div>
           <PhotoList photos={assets} />
