@@ -1,14 +1,14 @@
 "use client";
 
 import type { PhotoData } from "@/types";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
 import { type JSX, useEffect } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import { Button } from "./ui/button";
 
 type PhotoDialogProps = {
-  img: PhotoData;
+  img: PhotoData | undefined;
   onClose: () => void;
 };
 
@@ -17,50 +17,41 @@ export default function PhotoDialog({
   onClose,
 }: PhotoDialogProps): JSX.Element {
   useEffect(() => {
-    // スクロールを無効化
-    document.body.style.overflow = "hidden";
-    // クリーンアップ関数でスクロールを再度有効化
-    return () => {
+    if (img === undefined) {
       document.body.style.overflow = "auto";
-    };
-  }, []);
+    } else {
+      document.body.style.overflow = "hidden";
+    }
+  }, [img]);
 
   return (
-    <motion.div
-      className="fixed top-0 left-0 w-screen h-screen z-50"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.4 }}
-    >
-      <div className="w-full h-full p-2 bg-slate-900/50">
+    <AnimatePresence>
+      {img && (
         <motion.div
-          className="fixed top-3 right-3 z-50"
+          className="fixed top-0 left-0 w-screen h-screen flex justify-center items-center p-5 bg-slate-900/70 z-50"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          exit={{ opacity: 0, scale: 0 }}
-          transition={{ duration: 0.4, delay: 0.4, ease: "easeIn" }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.4 }}
         >
-          <Button variant={"outline"} onClick={onClose}>
-            <AiOutlineClose />
-          </Button>
+          <div className="relative w-full h-full">
+            <Image
+              src={img.url}
+              className="object-contain rounded-md"
+              fill={true}
+              quality={100}
+              alt={img.title}
+            />
+            <Button
+              variant={"outline"}
+              onClick={onClose}
+              className="absolute top-3 right-3 rounded-full p-2 bg-white"
+            >
+              <AiOutlineClose />
+            </Button>
+          </div>
         </motion.div>
-        <motion.div
-          className="relative flex justify-center items-center w-full h-full"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0, scale: 0 }}
-          transition={{ duration: 0.4, delay: 0.4, ease: "easeIn" }}
-        >
-          <Image
-            src={img.url}
-            className="object-contain"
-            fill={true}
-            quality={100}
-            alt={img.title}
-          />
-        </motion.div>
-      </div>
-    </motion.div>
+      )}
+    </AnimatePresence>
   );
 }

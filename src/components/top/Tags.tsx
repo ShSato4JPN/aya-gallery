@@ -30,7 +30,7 @@ export default function Tags(): JSX.Element {
         <Loading />
       ) : (
         <motion.div
-          className="w-full h-full flex flex-col items-center justify-center"
+          className="flex flex-col items-center justify-center"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{
@@ -42,7 +42,7 @@ export default function Tags(): JSX.Element {
             <LuTag />
             <h1 className="font-bold mb-1">Tags</h1>
           </div>
-          <div className="w-3/5 max-w-[800px] flex justify-center flex-wrap gap-3 bg-slate-200 rounded-lg shadow-lg mt-4 p-5">
+          <div className="w-3/5 max-w-[900px] flex justify-center flex-wrap gap-3 bg-slate-300/60 rounded-lg shadow-lg mt-4 p-5">
             {tags.map((tag) => (
               <motion.div
                 key={tag.id}

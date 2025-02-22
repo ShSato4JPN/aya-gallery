@@ -56,7 +56,12 @@ export default function Contact(): JSX.Element {
             name="name"
             render={({ message }) => <ValidMessage message={message} />}
           />
-          <Input type="text" id="name" {...register("name")} />
+          <Input
+            type="text"
+            className="bg-white"
+            id="name"
+            {...register("name")}
+          />
         </div>
         <div className="mb-2">
           <Label htmlFor="email">メールアドレス</Label>
@@ -65,7 +70,12 @@ export default function Contact(): JSX.Element {
             name="email"
             render={({ message }) => <ValidMessage message={message} />}
           />
-          <Input type="email" id="email" {...register("email")} />
+          <Input
+            type="email"
+            className="bg-white"
+            id="email"
+            {...register("email")}
+          />
         </div>
         <div className="mb-2">
           <Label htmlFor="subject">題名</Label>
@@ -74,7 +84,12 @@ export default function Contact(): JSX.Element {
             name="subject"
             render={({ message }) => <ValidMessage message={message} />}
           />
-          <Input type="text" id="subject" {...register("subject")} />
+          <Input
+            type="text"
+            className="bg-white"
+            id="subject"
+            {...register("subject")}
+          />
         </div>
         <div className="mb-2">
           <Label htmlFor="body">本文</Label>
@@ -83,7 +98,12 @@ export default function Contact(): JSX.Element {
             name="body"
             render={({ message }) => <ValidMessage message={message} />}
           />
-          <Textarea id="body" {...register("body")} rows={9} />
+          <Textarea
+            id="body"
+            className="bg-white"
+            {...register("body")}
+            rows={9}
+          />
         </div>
         <div className=" flex justify-center mt-4">
           <Button type="submit" variant="outline">

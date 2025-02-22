@@ -23,7 +23,7 @@ export default function SnsIcons() {
         <Link
           key={url}
           href={url}
-          className="hover:animate-bounce transition duration-300"
+          className="hover:animate-bounce hover:text-brand transition duration-300"
         >
           {icon}
         </Link>

@@ -42,14 +42,14 @@ export default function PhotoList({ photos }: PhotoListProps) {
         "relative w-full h-52 col-start-1 col-end-2 md:h-64 md:col-start-1 md:col-end-3 md:row-start-2 md:row-end-3",
         "relative w-full h-52 col-start-2 col-end-3 md:h-64 md:col-start-1 md:col-end-2 md:row-start-1 md:row-end-2",
         "relative w-full h-52 col-start-1 col-end-3 row-start-2 row-end-3 md:h-64 md:col-start-2 md:col-end-3 md:row-start-1 md:row-end-2",
-        "relative w-full h-80 col-start-1 col-end-4 md:h-full md:col-start-3 md:col-end-5 md:row-start-1 md:row-end-3",
-        "relative w-full h-52 col-start-1 col-end-4 md:h-full md:col-start-5 md:col-end-6 md:row-start-1 md:row-end-3",
+        "relative w-full h-80 col-start-1 col-end-3 md:h-full md:col-start-3 md:col-end-5 md:row-start-1 md:row-end-3",
+        "relative w-full h-52 col-start-1 col-end-3 md:h-full md:col-start-5 md:col-end-6 md:row-start-1 md:row-end-3",
       ],
       [
-        "relative w-full h-80 col-start-1 col-end-4 md:h-full md:col-start-1 md:col-end-3 md:row-start-1 md:row-end-3",
+        "relative w-full h-80 col-start-1 col-end-3 md:h-full md:col-start-1 md:col-end-3 md:row-start-1 md:row-end-3",
         "relative w-full h-52 h-52 col-start-1 col-end-2 md:h-64 md:col-start-3 md:col-end-4 md:row-start-1 md:row-end-2",
         "relative w-full h-52 h-52 col-start-2 col-end-3 col-start-1 col-end-3 md:h-64 md:col-start-4 md:col-end-6 md:row-start-1 md:row-end-2",
-        "relative w-full h-52 col-start-1 col-end-3 md:h-64 md:col-start-3 md:col-end-5 md:row-start-2 md:row-end-3",
+        "relative w-full h-52 col-start-1 col-end-2 md:h-64 md:col-start-3 md:col-end-5 md:row-start-2 md:row-end-3",
         "relative w-full h-52 md:h-64 md:col-start-5 md:col-end-6 md:row-start-2 md:row-end-3",
       ],
       [
@@ -93,14 +93,10 @@ export default function PhotoList({ photos }: PhotoListProps) {
 
   return (
     <section className="w-full">
-      <AnimatePresence>
-        {selectedImage && (
-          <PhotoDialog
-            img={selectedImage}
-            onClose={() => setSelectedImage(undefined)}
-          />
-        )}
-      </AnimatePresence>
+      <PhotoDialog
+        img={selectedImage}
+        onClose={() => setSelectedImage(undefined)}
+      />
       <ul className="flex flex-col p-2 gap-2 md:p-3 md:gap-3">
         {groups.map((photosData, index) => (
           <li key={photosData[0].url}>
