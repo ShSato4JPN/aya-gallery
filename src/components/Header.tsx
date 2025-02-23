@@ -4,7 +4,7 @@ import type { JSX } from "react";
 
 export default function Header(): JSX.Element {
   return (
-    <header className="md:border-b border-gray-300">
+    <header className="md:border-b border-border">
       <div className="md:hidden">
         <HamburgerNav />
       </div>

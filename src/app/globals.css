@@ -3,11 +3,10 @@
 @tailwind utilities;
 @layer base {
   :root {
-    --brand: 212 100 50;
-    --brand-foreground:
-
-    --background: 0 0% 100%;
-    --foreground: 240 10% 3.9%;
+    --brand-color: 212 100 50;
+    --text-color: 0 0 15;
+    --background: 0 0 100 / 0.9;
+    --foreground: 0 0 100 / 0.6;
     --card: 0 0% 100%;
     --card-foreground: 240 10% 3.9%;
     --popover: 0 0% 100%;

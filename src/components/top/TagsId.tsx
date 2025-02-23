@@ -18,7 +18,7 @@ type TagsIdProps = {
 
 export default function TagsId({ id, name }: TagsIdProps): JSX.Element {
   const { data, isFetching } = useQuery<AssetsData>({
-    queryKey: ["tag-id"],
+    queryKey: [`tag-${id}`],
     queryFn: () => fetchAssetsData(id),
   });
 
@@ -36,7 +36,7 @@ export default function TagsId({ id, name }: TagsIdProps): JSX.Element {
   }, [data]);
 
   return (
-    <main className="w-full min-h-full flex flex-col items-center">
+    <main className="w-full h-full flex flex-col items-center justify-center">
       {isFetching ? (
         <Loading />
       ) : (

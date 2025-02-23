@@ -50,10 +50,7 @@ export default function HamburgerNav(): JSX.Element {
               ease: "easeIn",
             }}
           >
-            <div className="h-full bg-white/70">
-              <div className="h-1/3 grid place-items-center">
-                <h1 className="text-3xl">{siteName}</h1>
-              </div>
+            <div className="h-full grid place-items-center bg-white/70">
               <div className="flex flex-col items-center space-y-8">
                 {menuLinks.map(({ href, label }) => {
                   const isActive = pathname === href;
@@ -61,8 +58,8 @@ export default function HamburgerNav(): JSX.Element {
                   return (
                     <Link key={href} href={href}>
                       <p
-                        className={`text-lg text-gray-800 text-center ${
-                          isActive && "border-b-2 border-gray-800"
+                        className={`text-lg ext-center ${
+                          isActive && "text-brand text-xl"
                         }`}
                       >
                         {label}

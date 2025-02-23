@@ -1,7 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
-import "./globals.css";
 import { QueryProvider } from "@/components/QueryProvider";
+import DotLayout from "@/components/DotLayout";
+import "./globals.css";
 import "pattern.css";
 
 const kiwiMaruLight = localFont({
@@ -40,10 +41,10 @@ export default function RootLayout({
   return (
     <html lang="ja">
       <body
-        className={`text-slate-700 ${kiwiMaruRegular.className} ${kiwiMaruLight.variable} ${kiwiMaruMedium.variable} ${kiwiMaruRegular.variable}`}
+        className={`text-thinBlack ${kiwiMaruRegular.className} ${kiwiMaruLight.variable} ${kiwiMaruMedium.variable} ${kiwiMaruRegular.variable}`}
       >
         <QueryProvider>
-          <div className="pattern-dots-md">{children}</div>
+          <DotLayout>{children}</DotLayout>
         </QueryProvider>
       </body>
     </html>

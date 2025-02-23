@@ -5,7 +5,9 @@ import { HydrationBoundary, dehydrate } from "@tanstack/react-query";
 
 export default async function Page({
   params,
-}: { params: Promise<{ id: string }> }) {
+}: {
+  params: Promise<{ id: string }>;
+}) {
   const queryClient = getQueryClient();
   const id = (await params).id;
   const tagName = (await fetchTagData(id)).items.at(0)?.name || "";
@@ -13,7 +15,7 @@ export default async function Page({
   console.log(tagName);
 
   await queryClient.prefetchQuery({
-    queryKey: ["tag-id"],
+    queryKey: [`tag-${id}`],
     queryFn: () => {
       fetchAssetsData(id);
     },

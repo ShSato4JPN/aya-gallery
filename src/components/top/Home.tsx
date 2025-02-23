@@ -10,19 +10,30 @@ import type { AssetEntry } from "@/types/contentful";
 import { useQuery } from "@tanstack/react-query";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { type JSX, useMemo, useState } from "react";
+import { type JSX, useEffect, useMemo, useState } from "react";
 import Loading from "../Loading";
 import PhotoList from "../PhotoList";
+import { useMediaQuery } from "react-responsive";
+import { siteName } from "@/lib/utils";
+import SnsIcons from "../SnsIcons";
 
 export default function Home(): JSX.Element {
   const entryId = process.env.NEXT_PUBLIC_ENTRY_ID_TOP as string;
 
   const [isOpeningEnd, setIsOpeningEnd] = useState<boolean>(false);
 
+  const isMobile = useMediaQuery({ query: "(max-width: 640px)" });
+
   const { data, isFetching } = useQuery<BlogPostData>({
     queryKey: ["post"],
     queryFn: () => fetchBlogPostData(entryId),
   });
+
+  useEffect(() => {
+    if (isOpeningEnd) {
+      window.scrollTo({ top: window.innerHeight, behavior: "smooth" });
+    }
+  }, [isOpeningEnd]);
 
   const photos: PhotoData[] = useMemo(() => {
     const photos = (data?.fields.photo as AssetEntry[]) || [];
@@ -37,10 +48,25 @@ export default function Home(): JSX.Element {
     }));
   }, [data]);
 
+  const MobilePageTop = () => (
+    <motion.div
+      className="w-full h-dvh flex flex-col justify-center items-center space-y-3"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ delay: 1, duration: 0.5 }}
+    >
+      <p className="text-2xl md:text-3xl">Welcome to</p>
+      <p className="text-3xl md:text-4xl">{siteName}</p>
+      <div className="pt-5">
+        <SnsIcons />
+      </div>
+    </motion.div>
+  );
+
   const SeeMore = () => (
     <motion.div
       className="w-full flex justify-center items-center p-2 text-gray-500 mt-5 mb-5"
-      animate={{ y: [-5, 5, -5] }}
+      animate={{ y: [-10, 10, -10] }}
       transition={{
         duration: 3,
         repeat: Number.POSITIVE_INFINITY,
@@ -57,7 +83,7 @@ export default function Home(): JSX.Element {
   );
 
   return (
-    <div className="grid place-items-center w-dvw bg-white/90">
+    <div className="grid place-items-center w-dvw">
       <Opening onOpeningEnd={() => setIsOpeningEnd(true)} />
       {isOpeningEnd && (
         <motion.div
@@ -71,12 +97,15 @@ export default function Home(): JSX.Element {
               <Loading />
             </div>
           ) : (
-            <main className="flex flex-col items-center justify-center">
-              <div className="w-full max-w-[1600px]">
-                <PhotoList photos={photos} />
-                <SeeMore />
-              </div>
-            </main>
+            <>
+              {isMobile && <MobilePageTop />}
+              <main className="flex flex-col items-center justify-center">
+                <div className="w-full max-w-[1600px]">
+                  <PhotoList photos={photos} />
+                  <SeeMore />
+                </div>
+              </main>
+            </>
           )}
           <Footer />
         </motion.div>

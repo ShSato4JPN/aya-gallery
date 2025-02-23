@@ -1,9 +1,11 @@
 "use client";
 
+import "pattern.css";
 import { siteName } from "@/lib/utils";
 import { motion } from "framer-motion";
 import { AnimatePresence } from "framer-motion";
 import { useState } from "react";
+import DotLayout from "./DotLayout";
 
 type OpeningProps = {
   onOpeningEnd: () => void;
@@ -41,14 +43,22 @@ export default function Opening({ onOpeningEnd }: OpeningProps) {
           }}
           exit="exit"
         >
-          <div className="w-full h-dvh flex flex-col justify-center items-center space-y-3">
-            <motion.p variants={childVariants} className="text-2xl">
-              Welcome to
-            </motion.p>
-            <motion.p variants={childVariants} className="text-3xl">
-              {siteName}
-            </motion.p>
-          </div>
+          <DotLayout>
+            <div className="w-full h-dvh flex flex-col justify-center items-center space-y-3">
+              <motion.p
+                variants={childVariants}
+                className="text-2xl md:text-3xl"
+              >
+                Welcome to
+              </motion.p>
+              <motion.p
+                variants={childVariants}
+                className="text-3xl md:text-4xl"
+              >
+                {siteName}
+              </motion.p>
+            </div>
+          </DotLayout>
         </motion.div>
       )}
     </AnimatePresence>
