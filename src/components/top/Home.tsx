@@ -30,10 +30,10 @@ export default function Home(): JSX.Element {
   });
 
   useEffect(() => {
-    if (isOpeningEnd) {
+    if (isOpeningEnd && isMobile) {
       window.scrollTo({ top: window.innerHeight, behavior: "smooth" });
     }
-  }, [isOpeningEnd]);
+  }, [isOpeningEnd, isMobile]);
 
   const photos: PhotoData[] = useMemo(() => {
     const photos = (data?.fields.photo as AssetEntry[]) || [];

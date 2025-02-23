@@ -39,7 +39,6 @@ export default function Tags(): JSX.Element {
           }}
         >
           <div className="flex items-center justify-center gap-2 text-3xl">
-            <LuTag />
             <h1 className="font-bold mb-1">Tags</h1>
           </div>
           <div className="w-full max-w-[900px] flex justify-center flex-wrap gap-3 bg-slate-300/50 rounded-lg shadow-lg mt-4 p-5">

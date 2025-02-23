@@ -5,7 +5,10 @@ import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
 import { type JSX, useEffect } from "react";
 import { AiOutlineClose } from "react-icons/ai";
+import { FiExternalLink } from "react-icons/fi";
+import { TbArrowBackUp } from "react-icons/tb";
 import { Button } from "./ui/button";
+import Link from "next/link";
 
 type PhotoDialogProps = {
   img: PhotoData | undefined;
@@ -42,13 +45,20 @@ export default function PhotoDialog({
               quality={100}
               alt={img.title}
             />
-            <Button
-              variant={"outline"}
-              onClick={onClose}
-              className="absolute top-3 right-3 rounded-full p-2 bg-white"
-            >
-              <AiOutlineClose />
-            </Button>
+            <div className="absolute inset-0 flex justify-between w-full h-full">
+              <Button
+                variant={"outline"}
+                onClick={onClose}
+                className="rounded-full"
+              >
+                <TbArrowBackUp />
+              </Button>
+              <Button variant={"outline"} className="rounded-full">
+                <Link href={img.url} target="_blank" rel="noopener noreferrer">
+                  <FiExternalLink />
+                </Link>
+              </Button>
+            </div>
           </div>
         </motion.div>
       )}

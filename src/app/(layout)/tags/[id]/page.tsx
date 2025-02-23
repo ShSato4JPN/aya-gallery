@@ -12,12 +12,10 @@ export default async function Page({
   const id = (await params).id;
   const tagName = (await fetchTagData(id)).items.at(0)?.name || "";
 
-  console.log(tagName);
-
   await queryClient.prefetchQuery({
     queryKey: [`tag-${id}`],
     queryFn: () => {
-      fetchAssetsData(id);
+      fetchAssetsData({ id });
     },
   });
   const dehydratedState = dehydrate(queryClient);

@@ -1,5 +1,6 @@
 "use client";
 
+import { motion } from "framer-motion";
 import type { AssetsData } from "@/app/api/assets/[tag]/route";
 import Loading from "@/components/Loading";
 import PhotoList from "@/components/PhotoList";
@@ -19,7 +20,7 @@ type TagsIdProps = {
 export default function TagsId({ id, name }: TagsIdProps): JSX.Element {
   const { data, isFetching } = useQuery<AssetsData>({
     queryKey: [`tag-${id}`],
-    queryFn: () => fetchAssetsData(id),
+    queryFn: () => fetchAssetsData({ id }),
   });
 
   const assets: PhotoData[] = useMemo(() => {
@@ -36,18 +37,30 @@ export default function TagsId({ id, name }: TagsIdProps): JSX.Element {
   }, [data]);
 
   return (
-    <main className="w-full h-full flex flex-col items-center justify-center">
+    <main className="w-full h-full flex flex-col items-center">
       {isFetching ? (
-        <Loading />
+        <div className="h-full flex justify-center items-center">
+          <Loading />
+        </div>
       ) : (
         <>
           <div className="flex items-center justify-center gap-2 mt-7 mr-3 mb-7 text-2xl">
-            <Link
-              href="/tags"
-              className="hover:scale-125 transition duration-300"
+            <motion.div
+              animate={{
+                x: [-5, 0, -5, 0, -5, 0],
+              }}
+              transition={{
+                duration: 0.5,
+                times: [0, 0.33, 0.66, 1],
+                repeat: Number.POSITIVE_INFINITY,
+                repeatDelay: 4,
+                ease: "linear",
+              }}
             >
-              <LuTag />
-            </Link>
+              <Link href="/tags">
+                <LuTag />
+              </Link>
+            </motion.div>
             <h1>{name}</h1>
           </div>
           <PhotoList photos={assets} />
