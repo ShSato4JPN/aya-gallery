@@ -21,11 +21,9 @@ export default function Home(): JSX.Element {
   const entryId = process.env.NEXT_PUBLIC_ENTRY_ID_TOP as string;
 
   const [isOpeningEnd, setIsOpeningEnd] = useState<boolean>(false);
-
   const isMobile = useMediaQuery({ query: "(max-width: 640px)" });
-
   const { data, isFetching } = useQuery<BlogPostData>({
-    queryKey: ["post"],
+    queryKey: ["top"],
     queryFn: () => fetchBlogPostData(entryId),
   });
 

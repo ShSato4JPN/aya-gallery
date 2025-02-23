@@ -31,7 +31,7 @@ export default function PhotoDialog({
     <AnimatePresence>
       {img && (
         <motion.div
-          className="fixed top-0 left-0 w-screen h-screen flex justify-center items-center p-5 bg-slate-900/70 z-50"
+          className="fixed top-0 left-0 w-screen h-screen flex justify-center items-center p-5 bg-slate-800/70 z-50"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -49,13 +49,13 @@ export default function PhotoDialog({
               <Button
                 variant={"outline"}
                 onClick={onClose}
-                className="rounded-full"
+                className="bg-gray-800 rounded-full"
               >
-                <TbArrowBackUp />
+                <TbArrowBackUp className="text-white" />
               </Button>
-              <Button variant={"outline"} className="rounded-full">
+              <Button variant={"outline"} className="bg-gray-800 rounded-full">
                 <Link href={img.url} target="_blank" rel="noopener noreferrer">
-                  <FiExternalLink />
+                  <FiExternalLink className="text-white" />
                 </Link>
               </Button>
             </div>

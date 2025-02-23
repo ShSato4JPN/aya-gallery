@@ -19,13 +19,13 @@ export default function GlobalNav(): JSX.Element {
     <nav className="w-full py-5">
       <div className="container mx-auto px-4 flex items-center justify-between">
         <div className="flex items-center justify-between">
-          <h1 className="text-3xl font-bold mr-12 hover:animate-bounce hover:text-brand transition duration-300">
+          <h1 className="text-3xl font-bold mr-12">
             <Link href="/">{siteName}</Link>
           </h1>
           <NavigationMenu>
             <NavigationMenuList className="flex space-x-10">
               {menuLinks.map(({ href, label }) => {
-                const isActive = pathname === href;
+                const isActive = `/${pathname.split("/").at(1)}` === href;
 
                 return (
                   <NavigationMenuItem key={href}>

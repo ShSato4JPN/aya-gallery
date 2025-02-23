@@ -1,19 +1,20 @@
 import Link from "next/link";
-import { FaFacebook, FaInstagram, FaXTwitter } from "react-icons/fa6";
+import { FaThreads, FaInstagram } from "react-icons/fa6";
+import { RiBlueskyLine } from "react-icons/ri";
 
 export default function SnsIcons() {
   const snsList = [
     {
-      url: "1",
-      icon: <FaXTwitter className="text-3xl" />,
+      url: "https://world-of-zono.com/about",
+      icon: <FaThreads className="text-3xl" />,
     },
     {
-      url: "2",
+      url: "https://world-of-zono.com/contact",
       icon: <FaInstagram className="text-3xl" />,
     },
     {
-      url: "3",
-      icon: <FaFacebook className="text-3xl" />,
+      url: "https://world-of-zono.com",
+      icon: <RiBlueskyLine className="text-3xl" />,
     },
   ];
 

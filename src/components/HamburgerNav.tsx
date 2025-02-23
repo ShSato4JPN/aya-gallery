@@ -53,7 +53,7 @@ export default function HamburgerNav(): JSX.Element {
             <div className="h-full grid place-items-center bg-white/70">
               <div className="flex flex-col items-center space-y-8">
                 {menuLinks.map(({ href, label }) => {
-                  const isActive = pathname === href;
+                  const isActive = `/${pathname.split("/").at(1)}` === href;
 
                   return (
                     <Link key={href} href={href}>

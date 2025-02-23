@@ -14,9 +14,7 @@ export default async function Page({
 
   await queryClient.prefetchQuery({
     queryKey: [`tag-${id}`],
-    queryFn: () => {
-      fetchAssetsData({ id });
-    },
+    queryFn: () => fetchAssetsData({ id }),
   });
   const dehydratedState = dehydrate(queryClient);
 

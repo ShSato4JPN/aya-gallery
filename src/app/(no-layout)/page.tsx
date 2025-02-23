@@ -8,7 +8,7 @@ export default async function Page() {
   const queryClient = getQueryClient();
 
   await queryClient.prefetchQuery({
-    queryKey: ["post"],
+    queryKey: ["top"],
     queryFn: () => fetchBlogPostData(entryId),
   });
   const dehydratedState = dehydrate(queryClient);
