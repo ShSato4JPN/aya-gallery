@@ -7,7 +7,7 @@ type DotLayoutProps = {
 
 export default function DotLayout({ children }: DotLayoutProps) {
   return (
-    <div className="pattern-dots-md ">
+    <div className="pattern-dots-md">
       <div className="bg-background">{children}</div>
     </div>
   );

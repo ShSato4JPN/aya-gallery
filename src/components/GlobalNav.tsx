@@ -19,7 +19,7 @@ export default function GlobalNav(): JSX.Element {
     <nav className="w-full py-5">
       <div className="container mx-auto px-4 flex items-center justify-between">
         <div className="flex items-center justify-between">
-          <h1 className="text-3xl font-bold mr-12">
+          <h1 className="text-3xl mr-12">
             <Link href="/">{siteName}</Link>
           </h1>
           <NavigationMenu>
@@ -43,7 +43,9 @@ export default function GlobalNav(): JSX.Element {
             </NavigationMenuList>
           </NavigationMenu>
         </div>
-        <SnsIcons />
+        <div className="hidden lg:block">
+          <SnsIcons />
+        </div>
       </div>
     </nav>
   );

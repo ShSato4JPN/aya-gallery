@@ -40,7 +40,7 @@ export default function HamburgerNav(): JSX.Element {
       </div>
       <AnimatePresence>
         {isOpen && (
-          <motion.div
+          <motion.nav
             className="fixed top-0 left-0 w-screen h-screen z-40"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1, backdropFilter: "blur(10px)" }}
@@ -69,7 +69,7 @@ export default function HamburgerNav(): JSX.Element {
                 })}
               </div>
             </div>
-          </motion.div>
+          </motion.nav>
         )}
       </AnimatePresence>
     </>

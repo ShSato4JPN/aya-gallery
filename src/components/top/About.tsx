@@ -25,7 +25,7 @@ export default function About(): JSX.Element {
           <AvatarFallback>Aya</AvatarFallback>
         </Avatar>
         <div className="mb-5">
-          <p className="text-3xl font-bold">Aya</p>
+          <p className="text-3xl">Aya</p>
         </div>
         <div className="mb-3 p-4 md:p-5 border-2 bg-foreground border-border rounded-lg">
           <p className="text-gray-700 leading-relaxed">

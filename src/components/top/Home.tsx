@@ -81,7 +81,7 @@ export default function Home(): JSX.Element {
   );
 
   return (
-    <div className="grid place-items-center w-dvw">
+    <div className="grid place-items-center">
       <Opening onOpeningEnd={() => setIsOpeningEnd(true)} />
       {isOpeningEnd && (
         <motion.div

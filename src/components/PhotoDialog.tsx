@@ -31,7 +31,7 @@ export default function PhotoDialog({
     <AnimatePresence>
       {img && (
         <motion.div
-          className="fixed top-0 left-0 w-screen h-screen flex justify-center items-center p-5 bg-slate-800/70 z-50"
+          className="fixed top-0 left-0 w-dvw h-dvh flex justify-center items-center py-4 px-2 bg-slate-800/70 z-50"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
