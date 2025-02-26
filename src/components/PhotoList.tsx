@@ -1,7 +1,7 @@
 "use client";
 
 import type { PhotoData } from "@/types";
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import Image from "next/image";
 import { useMemo, useState } from "react";
 import PhotoDialog from "./PhotoDialog";
@@ -21,12 +21,12 @@ export default function PhotoList({ photos }: PhotoListProps) {
   const [selectedImage, setSelectedImage] = useState<PhotoData>();
 
   const groups = useMemo(() => {
-    const g: PhotoData[][] = [];
+    const group: PhotoData[][] = [];
     for (let i = 0; i < photos.length; i += itemCount) {
-      g.push(photos.slice(i, i + itemCount));
+      group.push(photos.slice(i, i + itemCount));
     }
 
-    return g;
+    return group;
   }, [photos]);
 
   const rendering = ({ group, countStart }: PhotosLayoutProps) => {

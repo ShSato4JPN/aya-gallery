@@ -5,15 +5,15 @@ import { RiBlueskyLine } from "react-icons/ri";
 export default function SnsIcons() {
   const snsList = [
     {
-      url: "https://world-of-zono.com/about",
+      url: "https://www.threads.net/@abcde___8___",
       icon: <FaThreads className="text-3xl" />,
     },
     {
-      url: "https://world-of-zono.com/contact",
+      url: "https://www.instagram.com/abcde___8___/",
       icon: <FaInstagram className="text-3xl" />,
     },
     {
-      url: "https://world-of-zono.com",
+      url: "https://bsky.app/profile/ayaaaaa-25.bsky.social",
       icon: <RiBlueskyLine className="text-3xl" />,
     },
   ];

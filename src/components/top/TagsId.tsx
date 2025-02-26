@@ -1,5 +1,6 @@
 "use client";
 
+import ClipLoader from "react-spinners/ClipLoader";
 import { motion } from "framer-motion";
 import type { AssetsData } from "@/app/api/assets/[tag]/route";
 import Loading from "@/components/Loading";
@@ -7,10 +8,11 @@ import PhotoList from "@/components/PhotoList";
 import { fetchAssetsData } from "@/lib/fetcher";
 import type { PhotoData } from "@/types";
 import type { AssetEntry } from "@/types/contentful";
-import { useQuery } from "@tanstack/react-query";
+import { useInfiniteQuery } from "@tanstack/react-query";
 import Link from "next/link";
-import { type JSX, useMemo } from "react";
+import { type JSX, useEffect, useMemo, useState } from "react";
 import { LuTag } from "react-icons/lu";
+import { useInView } from "react-intersection-observer";
 
 type TagsIdProps = {
   id: string;
@@ -18,13 +20,44 @@ type TagsIdProps = {
 };
 
 export default function TagsId({ id, name }: TagsIdProps): JSX.Element {
-  const { data, isFetching } = useQuery<AssetsData>({
-    queryKey: [`tag-${id}`],
-    queryFn: () => fetchAssetsData({ id }),
+  const [isFirstFetching, setIsFirstFetching] = useState<boolean>(true);
+  const { ref, inView } = useInView();
+
+  const {
+    status,
+    data,
+    error,
+    isFetching,
+    isFetchingNextPage,
+    isFetchingPreviousPage,
+    fetchNextPage,
+    fetchPreviousPage,
+    hasNextPage,
+    hasPreviousPage,
+  } = useInfiniteQuery({
+    queryKey: [`infinite-tag-${id}`],
+    queryFn: async ({
+      pageParam,
+    }): Promise<{
+      data: AssetsData;
+      previousId: number;
+      nextId: number;
+    }> => {
+      const data = await fetchAssetsData({
+        id,
+        limit: 10,
+        skip: pageParam * 10,
+      });
+      return { data, previousId: pageParam - 1, nextId: pageParam + 1 };
+    },
+    initialPageParam: 0,
+    getPreviousPageParam: (firstPage) => firstPage.previousId,
+    getNextPageParam: (lastPage) => lastPage.nextId,
   });
 
   const assets: PhotoData[] = useMemo(() => {
-    const assets = (data?.items as AssetEntry[]) || [];
+    const assets =
+      (data?.pages.flatMap((v) => v.data.items) as AssetEntry[]) || [];
 
     return assets.map((v) => ({
       title: v.fields.title,
@@ -36,9 +69,22 @@ export default function TagsId({ id, name }: TagsIdProps): JSX.Element {
     }));
   }, [data]);
 
+  useEffect(() => {
+    if (status === "success") {
+      setIsFirstFetching(false);
+    }
+  }, [status]);
+
+  useEffect(() => {
+    if (inView && hasNextPage) {
+      fetchNextPage();
+    }
+  }, [fetchNextPage, inView, hasNextPage]);
+
   return (
     <main className="w-full h-full flex flex-col items-center">
-      {isFetching ? (
+      {JSON.stringify(data)}
+      {isFirstFetching ? (
         <div className="h-full flex justify-center items-center">
           <Loading />
         </div>
@@ -64,6 +110,11 @@ export default function TagsId({ id, name }: TagsIdProps): JSX.Element {
             <h1>{name}</h1>
           </div>
           <PhotoList photos={assets} />
+          {hasNextPage && (
+            <div className="flex justify-center items-center m-5">
+              <ClipLoader ref={ref} color="#858585" />
+            </div>
+          )}
         </>
       )}
     </main>

@@ -34,6 +34,17 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   applicationName: "Aya-Gallery",
   description: "Photo Posting Blog by AYA",
+  openGraph: {
+    title: "Aya-Gallery",
+    description: "Photo Posting Blog by AYA",
+    siteName: "Aya-Gallery",
+    images: {
+      url: `${process.env.NEXT_PUBLIC_URL}/og-image.webp`,
+      alt: "Aya-Gallery thumbnail",
+      width: "1280",
+      height: "864",
+    },
+  },
   title: {
     default: "Aya-Gallery",
     template: "%s - Aya-Gallery",
