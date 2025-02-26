@@ -19,40 +19,37 @@ type TagsIdProps = {
   name: string;
 };
 
+const dataCount = 10;
+
 export default function TagsId({ id, name }: TagsIdProps): JSX.Element {
   const [isFirstFetching, setIsFirstFetching] = useState<boolean>(true);
   const { ref, inView } = useInView();
 
-  const {
-    status,
-    data,
-    error,
-    isFetching,
-    isFetchingNextPage,
-    isFetchingPreviousPage,
-    fetchNextPage,
-    fetchPreviousPage,
-    hasNextPage,
-    hasPreviousPage,
-  } = useInfiniteQuery({
+  const { status, data, fetchNextPage, hasNextPage } = useInfiniteQuery({
     queryKey: [`infinite-tag-${id}`],
     queryFn: async ({
       pageParam,
     }): Promise<{
       data: AssetsData;
-      previousId: number;
-      nextId: number;
+      previousPageNo: number;
+      nextPageNo: number | null;
     }> => {
       const data = await fetchAssetsData({
         id,
-        limit: 10,
-        skip: pageParam * 10,
+        limit: dataCount,
+        skip: pageParam * dataCount,
       });
-      return { data, previousId: pageParam - 1, nextId: pageParam + 1 };
+
+      const total = data.total;
+      const nextPageNo =
+        (pageParam + 1) * dataCount < total ? pageParam + 1 : null;
+      const previousPageNo = 0 < pageParam ? pageParam : pageParam - 1;
+
+      return { data, previousPageNo, nextPageNo };
     },
     initialPageParam: 0,
-    getPreviousPageParam: (firstPage) => firstPage.previousId,
-    getNextPageParam: (lastPage) => lastPage.nextId,
+    getPreviousPageParam: (firstPage) => firstPage.previousPageNo,
+    getNextPageParam: (lastPage) => lastPage.nextPageNo,
   });
 
   const assets: PhotoData[] = useMemo(() => {
@@ -83,7 +80,7 @@ export default function TagsId({ id, name }: TagsIdProps): JSX.Element {
 
   return (
     <main className="w-full h-full flex flex-col items-center">
-      {JSON.stringify(data)}
+      {/* {JSON.stringify(data)} */}
       {isFirstFetching ? (
         <div className="h-full flex justify-center items-center">
           <Loading />
