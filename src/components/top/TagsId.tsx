@@ -79,7 +79,7 @@ export default function TagsId({ id, name }: TagsIdProps): JSX.Element {
   }, [fetchNextPage, inView, hasNextPage]);
 
   return (
-    <div className="w-full h-full grid place-items-center p-4">
+    <div className="w-full h-full grid place-items-center">
       {isFirstFetching ? (
         <Loading />
       ) : (
