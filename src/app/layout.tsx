@@ -1,12 +1,11 @@
+import DotLayout from "@/components/DotLayout";
+import { QueryProvider } from "@/components/QueryProvider";
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
-import { QueryProvider } from "@/components/QueryProvider";
-import DotLayout from "@/components/DotLayout";
 import "./globals.css";
 import "pattern.css";
-import dayjs from "dayjs";
-
-dayjs.locale("ja");
+import { GoogleAnalytics } from "@next/third-parties/google";
+import "dayjs/locale/ja";
 
 const kiwiMaruLight = localFont({
   src: "./KiwiMaru-Light.ttf",
@@ -65,6 +64,7 @@ export default function RootLayout({
           <DotLayout>{children}</DotLayout>
         </QueryProvider>
       </body>
+      <GoogleAnalytics gaId="G-C32DDB4QRD" />
     </html>
   );
 }
