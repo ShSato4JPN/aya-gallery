@@ -5,16 +5,16 @@ import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import Opening from "@/components/Opening";
 import { fetchBlogPostData } from "@/lib/fetcher";
+import { siteName } from "@/lib/utils";
 import type { PhotoData } from "@/types";
 import type { AssetEntry } from "@/types/contentful";
 import { useQuery } from "@tanstack/react-query";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { type JSX, useEffect, useMemo, useState } from "react";
+import { useMediaQuery } from "react-responsive";
 import Loading from "../Loading";
 import PhotoList from "../PhotoList";
-import { useMediaQuery } from "react-responsive";
-import { siteName } from "@/lib/utils";
 import SnsIcons from "../SnsIcons";
 
 export default function Home(): JSX.Element {
@@ -85,7 +85,7 @@ export default function Home(): JSX.Element {
       <Opening onOpeningEnd={() => setIsOpeningEnd(true)} />
       {isOpeningEnd && (
         <motion.div
-          className="grid grid-rows-[auto,1fr,auto] w-full"
+          className="grid grid-rows-[auto,1fr,auto] w-full min-h-dvh"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1, transition: { duration: 1 } }}
         >
