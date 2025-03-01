@@ -4,11 +4,13 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { sendMail } from "@/lib/fetcher";
 import { ErrorMessage } from "@hookform/error-message";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { motion } from "framer-motion";
-import React, { type JSX } from "react";
+import type { JSX } from "react";
 import { type SubmitHandler, useForm } from "react-hook-form";
+import { ToastContainer, toast } from "react-toastify";
 import { z } from "zod";
 
 const schema = z.object({
@@ -18,7 +20,7 @@ const schema = z.object({
     .nonempty({ message: "メールアドレスを入力してください!" })
     .email({ message: "入力されたメールアドレスに不備があります!" }),
   subject: z.string().nonempty({ message: "題名を入力してください!" }),
-  body: z.string().min(10, { message: "本文は 10 文字以上入力してください!" }),
+  text: z.string().min(10, { message: "本文は 10 文字以上入力してください!" }),
 });
 
 type Inputs = z.infer<typeof schema>;
@@ -29,9 +31,12 @@ export default function Contact(): JSX.Element {
     handleSubmit,
     formState: { errors },
   } = useForm<Inputs>({ resolver: zodResolver(schema) });
-  const onSubmit: SubmitHandler<Inputs> = (data) => {
-    // メール送信処理を実装する
-    alert(JSON.stringify(errors));
+  const onSubmit: SubmitHandler<Inputs> = async (data) => {
+    await toast.promise(sendMail(data), {
+      error: "送信に失敗しました",
+      pending: "送信しています…",
+      success: "メッセージを送信しました",
+    });
   };
 
   const ValidMessage = ({ message }: { message: string }): JSX.Element => (
@@ -95,13 +100,13 @@ export default function Contact(): JSX.Element {
           <Label htmlFor="body">本文</Label>
           <ErrorMessage
             errors={errors}
-            name="body"
+            name="text"
             render={({ message }) => <ValidMessage message={message} />}
           />
           <Textarea
             id="body"
             className="bg-white"
-            {...register("body")}
+            {...register("text")}
             rows={9}
           />
         </div>
@@ -111,6 +116,7 @@ export default function Contact(): JSX.Element {
           </Button>
         </div>
       </form>
+      <ToastContainer position="bottom-center" />
     </motion.div>
   );
 }

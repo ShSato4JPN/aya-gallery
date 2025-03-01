@@ -1,13 +1,12 @@
 "use client";
 
 import type { TagsData } from "@/app/api/tags/route";
+import Loading from "@/components/Loading";
 import { fetchTagsList } from "@/lib/fetcher";
 import { useQuery } from "@tanstack/react-query";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { type JSX, useMemo } from "react";
-import Loading from "@/components/Loading";
-import { LuTag } from "react-icons/lu";
 
 type Tag = {
   id: string;
@@ -25,19 +24,19 @@ export default function Tags(): JSX.Element {
   }, [data]);
 
   return (
-    <div className="w-full h-full flex flex-col items-center justify-center">
+    <motion.div
+      className="w-full h-full grid place-items-center p-4"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{
+        duration: 0.5,
+        ease: "easeIn",
+      }}
+    >
       {isFetching ? (
         <Loading />
       ) : (
-        <motion.div
-          className="flex flex-col items-center justify-center p-4"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{
-            duration: 0.5,
-            ease: "easeIn",
-          }}
-        >
+        <>
           <div className="flex items-center justify-center gap-2 text-3xl">
             <h1 className="mb-1">Tags</h1>
           </div>
@@ -52,8 +51,8 @@ export default function Tags(): JSX.Element {
               </motion.div>
             ))}
           </div>
-        </motion.div>
+        </>
       )}
-    </div>
+    </motion.div>
   );
 }

@@ -1,7 +1,5 @@
 "use client";
 
-import ClipLoader from "react-spinners/ClipLoader";
-import { motion } from "framer-motion";
 import type { AssetsData } from "@/app/api/assets/[tag]/route";
 import Loading from "@/components/Loading";
 import PhotoList from "@/components/PhotoList";
@@ -9,10 +7,12 @@ import { fetchAssetsData } from "@/lib/fetcher";
 import type { PhotoData } from "@/types";
 import type { AssetEntry } from "@/types/contentful";
 import { useInfiniteQuery } from "@tanstack/react-query";
+import { motion } from "framer-motion";
 import Link from "next/link";
 import { type JSX, useEffect, useMemo, useState } from "react";
 import { LuTag } from "react-icons/lu";
 import { useInView } from "react-intersection-observer";
+import ClipLoader from "react-spinners/ClipLoader";
 
 type TagsIdProps = {
   id: string;
@@ -79,12 +79,9 @@ export default function TagsId({ id, name }: TagsIdProps): JSX.Element {
   }, [fetchNextPage, inView, hasNextPage]);
 
   return (
-    <main className="w-full h-full flex flex-col items-center">
-      {/* {JSON.stringify(data)} */}
+    <div className="w-full h-full grid place-items-center p-4">
       {isFirstFetching ? (
-        <div className="h-full flex justify-center items-center">
-          <Loading />
-        </div>
+        <Loading />
       ) : (
         <>
           <div className="flex items-center justify-center gap-2 mt-7 mr-3 mb-7 text-2xl">
@@ -114,6 +111,6 @@ export default function TagsId({ id, name }: TagsIdProps): JSX.Element {
           )}
         </>
       )}
-    </main>
+    </div>
   );
 }
