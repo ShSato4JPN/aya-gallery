@@ -64,11 +64,11 @@ export default function PhotoList({ photos }: PhotoListProps) {
     // 急遽レイアウト崩れ対応策に用意したスタイル
     const subStyles = [
       [
-        "relative w-full h-80 col-start-1 col-end-3 md:h-92 md:col-start-2 md:col-end-5",
+        "relative w-full h-80 col-start-1 col-end-3 md:h-[500px] md:col-start-2 md:col-end-5",
       ],
       [
-        "relative w-full h-80 col-start-1 col-end-3 md:h-64 md:col-start-1 md:col-end-3",
-        "relative w-full h-80 col-start-1 col-end-3 md:h-64 md:col-start-3 md:col-end-4",
+        "relative w-full h-80 col-start-1 col-end-3 md:h-[400px] md:col-start-1 md:col-end-3",
+        "relative w-full h-80 col-start-1 col-end-3 md:h-[400px] md:col-start-3 md:col-end-5",
       ],
       [
         "relative w-full h-80 col-start-1 col-end-3 md:h-full md:col-start-1 md:col-end-3 md:row-start-1 md:row-end-3",
