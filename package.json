@@ -43,7 +43,7 @@
     "react-spinners": "0.17.0",
     "react-toastify": "11.0.5",
     "react-window": "1.8.11",
-    "sass": "1.89.0",
+    "sass": "1.89.1",
     "tailwind-merge": "2.6.0",
     "tailwindcss-animate": "1.0.7",
     "zod": "3.25.42"
